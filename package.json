@@ -1,0 +1,16 @@
+{
+  "name": "pi-block-no-verify",
+  "version": "0.1.0",
+  "description": "Pi extension that blocks git hook bypasses via block-no-verify",
+  "keywords": ["pi-package", "pi-extension", "block-no-verify", "git-hooks", "security"],
+  "license": "MIT",
+  "dependencies": {
+    "block-no-verify": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "pi": {
+    "extensions": ["./index.ts"]
+  }
+}
