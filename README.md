@@ -7,7 +7,7 @@ Delegates all detection to [block-no-verify](https://github.com/timothykang/bloc
 ## Install
 
 ```bash
-pi install npm:kirby/pi-block-no-verify
+pi install https://github.com/rikby/pi-block-no-verify
 ```
 
 ## What it blocks
