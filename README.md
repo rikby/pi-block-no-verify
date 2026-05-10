@@ -2,7 +2,7 @@
 
 Pi extension that prevents AI agents from bypassing local git hooks.
 
-Delegates all detection to [block-no-verify](https://github.com/timothykang/block-no-verify) — catches `--no-verify` flags, `core.hooksPath` overrides, and GitHub MCP tools that write through the API.
+Delegates all detection to [block-no-verify](https://github.com/tupe12334/block-no-verify) — catches `--no-verify` flags, `core.hooksPath` overrides, and GitHub MCP tools that write through the API.
 
 ## Install
 
