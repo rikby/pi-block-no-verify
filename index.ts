@@ -24,10 +24,10 @@ const require = createRequire(import.meta.url);
 
 function findBinary(): string | null {
 	try {
-		// Resolve the package, then navigate to its declared binary
-		const pkgPath = require.resolve("block-no-verify/package.json");
-		const pkgDir = dirname(pkgPath);
-		return resolve(pkgDir, "dist/cli.js");
+		// Resolve the package entry, then navigate to the CLI binary
+		const entryPath = require.resolve("block-no-verify");
+		const pkgDir = dirname(entryPath);
+		return resolve(pkgDir, "cli.js");
 	} catch {
 		return null;
 	}
@@ -40,7 +40,7 @@ export default function (pi: ExtensionAPI) {
 		if (!binary) {
 			ctx.ui.notify(
 				"⚠ block-no-verify not found — git hook bypasses will NOT be blocked\n" +
-				"  Install: bun add -D block-no-verify",
+				"  Install: cd " + dirname(new URL(import.meta.url).pathname) + " && bun install",
 				"warn",
 			);
 		}
