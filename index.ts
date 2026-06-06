@@ -15,22 +15,16 @@
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { resolve, dirname } from "node:path";
-import { createRequire } from "node:module";
+import { existsSync } from "node:fs";
 import { execSync } from "node:child_process";
 
 const RUNTIME = process.execPath;
 
-const require = createRequire(import.meta.url);
+const EXT_DIR = dirname(new URL(import.meta.url).pathname);
 
 function findBinary(): string | null {
-	try {
-		// Resolve the package entry, then navigate to the CLI binary
-		const entryPath = require.resolve("block-no-verify");
-		const pkgDir = dirname(entryPath);
-		return resolve(pkgDir, "cli.js");
-	} catch {
-		return null;
-	}
+	const binary = resolve(EXT_DIR, "node_modules/block-no-verify/dist/cli.js");
+	return existsSync(binary) ? binary : null;
 }
 
 export default function (pi: ExtensionAPI) {
@@ -40,7 +34,7 @@ export default function (pi: ExtensionAPI) {
 		if (!binary) {
 			ctx.ui.notify(
 				"⚠ block-no-verify not found — git hook bypasses will NOT be blocked\n" +
-				"  Install: cd " + dirname(new URL(import.meta.url).pathname) + " && bun install",
+				"  Install: cd " + EXT_DIR + " && bun install",
 				"warn",
 			);
 		}
